@@ -11,12 +11,16 @@ myLeftovers = []
 
 print(myUniqueList)
 
+def addToLeftOvers(value) :
+    myLeftovers.append(value)
+    return
+
 def addToList(value) :
     result = False
     try :
         index = myUniqueList.index(value)
         result = False
-        myLeftovers.append(value)
+        addToLeftOvers(value)
     except ValueError :
         result = True
         myUniqueList.append(value)
