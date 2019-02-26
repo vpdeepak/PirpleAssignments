@@ -6,6 +6,8 @@ The different attributes are explained as and when they are defined.
 """
 import datetime
 
+print("Assignment on Functions")
+
 def artist() :
     return "Kishore Kumar"
 

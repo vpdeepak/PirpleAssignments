@@ -6,6 +6,8 @@ The different attributes are explained as and when they are defined.
 """
 import datetime
 
+print("Assignment on Variables")
+
 Song = "Aanewala Pal Jane Wala Hai" # Title of the song.
 Artist = "Kishore Kumar"  # Singer.
 Lyricist = "Gulzar" # Writers of the song.
