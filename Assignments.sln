@@ -7,6 +7,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Variables", "Variables\Vari
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Functions", "Functions\Functions.pyproj", "{C1A5D358-8482-4896-85C1-50AE823FC6AA}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "IfStatements", "IfStatements\IfStatements.pyproj", "{24C6F660-B847-4506-A112-4628AA8A6B61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,8 @@ Global
 		{8A832DEA-777E-48EB-A137-59396E1106EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1A5D358-8482-4896-85C1-50AE823FC6AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1A5D358-8482-4896-85C1-50AE823FC6AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C6F660-B847-4506-A112-4628AA8A6B61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C6F660-B847-4506-A112-4628AA8A6B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
