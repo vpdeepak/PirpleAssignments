@@ -1,5 +1,5 @@
 """
-This is the solution for the Homework #1: Variables.
+This is the solution for the Homework #2: Functions.
 
 This file displays the various attributes of my favorite song.
 The different attributes are explained as and when they are defined.
