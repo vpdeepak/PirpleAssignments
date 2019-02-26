@@ -1,8 +1,6 @@
 """
 This is the solution for the Homework #3: "If" Statements.
 
-This file displays the various attributes of my favorite song.
-The different attributes are explained as and when they are defined.
 """
 
 print("Assignment on If Statements")
