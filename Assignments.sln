@@ -15,6 +15,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "BasicLoops", "BasicLoops\Ba
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "AdvancedLoops", "AdvancedLoops\AdvancedLoops.pyproj", "{A09FA6AA-2A55-4453-80B7-A748736B4374}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DictionariesAndSets", "DictionariesAndSets\DictionariesAndSets.pyproj", "{496EEBC2-A629-4A47-86BD-B9C4BC702265}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,8 @@ Global
 		{84E0C146-3CFE-4422-9FF2-9DC2335E289A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A09FA6AA-2A55-4453-80B7-A748736B4374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A09FA6AA-2A55-4453-80B7-A748736B4374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496EEBC2-A629-4A47-86BD-B9C4BC702265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496EEBC2-A629-4A47-86BD-B9C4BC702265}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
