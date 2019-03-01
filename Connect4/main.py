@@ -4,9 +4,14 @@ This is the solution for the Project #1: Connect 4
 """
 print("Assignment on Connect 4" , "\n")
 
+rows = 12
+columns = 14
+winCount = 4
+
+fieldRowSize = int(rows/2)
+fieldColumnSize = int(columns/2)
+
 def DrawBoard(fields) :
-    rows = 12
-    columns = 14
     for row in range(rows) :
         if(row % 2 == 0) :
             practicalRow = int(row / 2)
@@ -30,22 +35,166 @@ def DrawBoard(fields) :
                     print("-")
     return
 
-def checkResult(fields) :
-    result = False
+def PlaceEntry(fields, currentColumn, entry) :
+    succeeded = False
+    previousRow = 0
+    for currentRow in range(fieldRowSize) :
+        if(fields[currentColumn][currentRow] == " ") :
+            if(currentRow == fieldRowSize - 1) :
+                fields[currentColumn][currentRow] = entry
+                succeeded = True
+            else : 
+                previousRow = currentRow
+                continue
+        else :
+            if(fields[currentColumn][previousRow] == " ") :
+                fields[currentColumn][previousRow] = entry
+                succeeded = True
+            break
+    return succeeded
 
-    return result
+def IsColumnCompleted(fields, currentColumn, entry) :
+    success = False
+    counter = 0
+    for currentRow in range(fieldRowSize) :
+        if(fields[currentColumn][currentRow] != entry) :
+            counter = 0
+            continue
+        else :
+            counter += 1
+        if(counter >= winCount) :
+            success = True
+            break
+    return success
 
-currentFields = [[" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], 
-                [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], 
-                [" ", " ", " ", " ", " ", " "]]
-DrawBoard(currentFields)
+def IsRowCompleted(fields, currentColumn, entry) :
+    success = False
+    for currentRow in range(fieldRowSize) :
+        if(fields[currentColumn][currentRow] != entry) :
+            continue
+        else :
+            #check on left
+            leftCounter = 1
+            for column in range(currentColumn - 1, -1, -1) :
+                if(fields[column][currentRow] != entry) :
+                    break
+                else :
+                    leftCounter += 1
+            #check on right
+            rightCounter = 1
+            for column in range(currentColumn + 1, fieldColumnSize) :
+                if(fields[column][currentRow] != entry) :
+                    break
+                else :
+                    rightCounter += 1
+            break
+    if(leftCounter >= winCount or rightCounter >= winCount) :
+        success = True
+    return success
 
-nextPlayer = 1
-while(True) :
-    Player = nextPlayer
-    column = int(input("Player {0} : Enter the column to insert : ".format(Player)))
+def getLeftBottomDiagonal(fields, column, row) :
+    counter = 1
+    row += 1
     column -= 1
-    rows = currentFields[column]
+    while(row < fieldRowSize and column >= 0) :
+        if(fields[column][row] != entry) :
+            break
+        else :
+            counter += 1
+            row += 1
+            column -= 1
+    return counter
+
+def getLeftUpDiagonal(fields, column, row) :
+    counter = 1
+    row -= 1
+    column -= 1
+    while(row >= 0 and column >= 0) :
+        if(fields[column][row] != entry) :
+            break
+        else :
+            counter += 1
+            row -= 1
+            column -= 1
+    return counter
+
+def getRightBottomDiagonal(fields, column, row) :
+    counter = 1
+    row += 1
+    column += 1
+    while(row < fieldRowSize and column < fieldColumnSize) :
+        if(fields[column][row] != entry) :
+            break
+        else :
+            counter += 1
+            row += 1
+            column += 1
+    return counter
+
+def getRightUpDiagonal(fields, column, row) :
+    counter = 1
+    row -= 1
+    column += 1
+    while(row >= 0 and column < fieldColumnSize) :
+        if(fields[column][row] != entry) :
+            break
+        else :
+            counter += 1
+            row -= 1
+            column += 1
+    return counter
+
+def IsDiagonalCompleted(fields, currentColumn, entry) :
+    success = False
+    for currentRow in range(fieldRowSize) :
+        if(fields[currentColumn][currentRow] != entry) :
+            continue
+        else :
+            #check left bottom
+            leftBottomCounter = getLeftBottomDiagonal(fields, currentColumn, currentRow)
+            #check left up
+            leftUpCounter = getLeftUpDiagonal(fields, currentColumn, currentRow)
+            #check right bottom
+            rightBottomCounter = getRightBottomDiagonal(fields, currentColumn, currentRow)
+            #check right up
+            rightUpCounter = getRightUpDiagonal(fields, currentColumn, currentRow)
+            break
+    
+    if(leftBottomCounter >= winCount or leftUpCounter >= winCount or
+       rightBottomCounter >= winCount or rightUpCounter >= winCount) :
+        success = True
+
+    return success
+
+def HasWon(fields, currentColumn, entry) :
+    success = False
+    if(IsColumnCompleted(fields, currentColumn, entry)) : #vertical downward check
+        success = True
+    elif(IsRowCompleted(fields, currentColumn, entry)) :  #horizontal row checks
+        success = True
+    elif(IsDiagonalCompleted(fields, currentColumn, entry)) : #diagonal checks
+        success = True
+    return success
+
+
+currentFields = []
+for column in range(fieldColumnSize) :
+    currentFields.append([])
+    for row in range(fieldRowSize) :
+        currentFields[column].append(" ")
+
+Player = 1
+NumberOfMoves = 0
+gameWon = False
+while(NumberOfMoves <= (fieldColumnSize-1)*(fieldRowSize-1)) :
+    DrawBoard(currentFields)
+    try :
+        currentColumn = int(input("Player {0} : Enter the column to insert : ".format(Player)))
+    except ValueError :
+        continue
+    if(currentColumn > fieldColumnSize) :
+        continue
+    
     if(Player == 1) :
         entry = "X"
         nextPlayer = 2
@@ -53,20 +202,18 @@ while(True) :
         entry = "O"
         nextPlayer = 1
 
-    previousRow = 0
-    for row in range(len(rows)) :
-        if(currentFields[column][row] == " ") :
-            if(row == len(rows) - 1) :
-                currentFields[column][row] = entry
-            else : 
-                previousRow = row
-                continue
+    if(PlaceEntry(currentFields, currentColumn - 1, entry)) :
+        if(not HasWon(currentFields, currentColumn - 1, entry)) :
+            Player = nextPlayer
+            NumberOfMoves += 1
         else :
-            if(currentFields[column][previousRow] == " ") :
-                currentFields[column][previousRow] = entry
-            else :
-                nextPlayer = Player
+            gameWon = True
             break
 
+print("\n====== GAME OVER ====== \n")
+if(gameWon) :
+    print("\nPlayer {0} : has won the game. \n".format(Player))
+else :
+    print("\nGAME IS DRAW")
+
 DrawBoard(currentFields)
-print("\n")
