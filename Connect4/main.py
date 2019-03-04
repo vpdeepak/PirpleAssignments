@@ -184,12 +184,12 @@ for column in range(fieldColumnSize) :
         currentFields[column].append(" ")
 
 Player = 1
-NumberOfMoves = 0
+NumberOfMoves = 1
 gameWon = False
-while(NumberOfMoves <= (fieldColumnSize-1)*(fieldRowSize-1)) :
+while(NumberOfMoves <= (fieldColumnSize * fieldRowSize) and not gameWon) :
     DrawBoard(currentFields)
     try :
-        currentColumn = int(input("Player {0} : Enter the column to insert : ".format(Player)))
+        currentColumn = int(input("Move {0} : Player {1} : Enter the column to insert : ".format(NumberOfMoves, Player)))
     except ValueError :
         continue
     if(currentColumn > fieldColumnSize) :
@@ -208,12 +208,11 @@ while(NumberOfMoves <= (fieldColumnSize-1)*(fieldRowSize-1)) :
             NumberOfMoves += 1
         else :
             gameWon = True
-            break
 
-print("\n====== GAME OVER ====== \n")
+print("\n====== GAME OVER ======")
 if(gameWon) :
-    print("\nPlayer {0} : has won the game. \n".format(Player))
+    print("Player {0} : has won the game. \n".format(Player))
 else :
-    print("\nGAME IS DRAW")
+    print("It's a DRAW \n")
 
 DrawBoard(currentFields)
