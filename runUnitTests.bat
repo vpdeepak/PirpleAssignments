@@ -1,4 +1,4 @@
 mkdir test-reports
 python.exe ./Import/unitTest.py
 
-pycodestyle . --filename=*.py
+pep8 . --filename=*.py
