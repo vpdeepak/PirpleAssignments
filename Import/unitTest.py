@@ -189,4 +189,4 @@ if __name__ == "__main__":
     with open('test-reports', 'wb') as output:
         runner = xmlrunner.XMLTestRunner(output=output)
         runner.run(carsTestSuite())
-        runner.run(planesTestSuite())
+        # runner.run(planesTestSuite())
