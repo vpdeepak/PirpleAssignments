@@ -3,24 +3,28 @@ This is the solution for the Homework #10: Importing
 
 """
 import unittest
+import xmlrunner
+import doctest
 
-class Vehicle :
-    def __init__(self, make, model, year, weight) :
+
+class Vehicle:
+    def __init__(self, make, model, year, weight):
         self.Make = make
         self.Model = model
         self.Year = year
         self.Weight = weight
         self.NeedsMaintenance = False
         self.TripsSinceMaintenance = 0
-    
-    #setters
-    def setMake(make) :
+        
+    # setters
+    def setMake(make):
         self.Make = make
 
-    def setModel(model) :
+
+    def setModel(model):
         self.Model = model
 
-    def setYear(year) :
+    def setYear(year):
         self.Year = year
 
     def setWeight(weight) :
@@ -171,15 +175,18 @@ def carsTestSuite() :
     suite.addTest(CarsTest('test_nothing'))
     return suite
 
-def planesTestSuite() :
+
+def planesTestSuite():
     suite = unittest.TestSuite()
     suite.addTest(PlanesTest('test_Flying'))
     suite.addTest(PlanesTest('test_Landing'))
     suite.addTest(PlanesTest('test_NeedsMaintainence'))
     return suite
 
-if __name__ == "__main__" :
-    #unittest.main()
-    runner = unittest.TextTestRunner()
-    runner.run(carsTestSuite())
-    runner.run(planesTestSuite())
+if __name__ == "__main__":
+    # unittest.main()
+    # runner = unittest.TextTestRunner()
+    with open('test-reports', 'wb') as output:
+        runner = xmlrunner.XMLTestRunner(output=output)
+        runner.run(carsTestSuite())
+        runner.run(planesTestSuite())
