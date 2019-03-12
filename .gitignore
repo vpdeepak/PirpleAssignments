@@ -6,3 +6,5 @@
 /Variables/.vs/Variables/v15/.suo
 *.suo
 /Import/__pycache__
+test-reports/carsTestSuite.xml
+test-reports/planesTestSuite.xml
