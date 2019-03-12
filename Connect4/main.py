@@ -11,99 +11,105 @@ winCount = 4
 fieldRowSize = int(rows/2)
 fieldColumnSize = int(columns/2)
 
-def DrawBoard(fields) :
-    for row in range(rows) :
-        if(row % 2 == 0) :
+
+def DrawBoard(fields):
+    for row in range(rows):
+        if(row % 2 == 0):
             practicalRow = int(row / 2)
-            for column in range(columns) :
-                if(column % 2 == 0) :
+            for column in range(columns):
+                if(column % 2 == 0):
                     practicalColumn = int(column / 2)
-                    if(column != columns - 1) :
-                        print(fields[practicalColumn][practicalRow], end = "")
+                    if(column != columns - 1):
+                        print(fields[practicalColumn][practicalRow], end="")
                     else:
                         print(fields[practicalColumn][practicalRow])
-                else :
-                    if(column != columns - 1) :
-                        print("|", end = "")
+                else:
+                    if(column != columns - 1):
+                        print("|", end="")
                     else:
                         print("|")
-        else :
-            for column in range(columns) :
-                if(column != columns - 1) :
-                    print("-", end = "")
-                else :
+        else:
+            for column in range(columns):
+                if(column != columns - 1):
+                    print("-", end="")
+                else:
                     print("-")
     return
 
-def PlaceEntry(fields, currentColumn, entry) :
+
+def PlaceEntry(fields, currentColumn, entry):
     succeeded = False
     previousRow = 0
-    for currentRow in range(fieldRowSize) :
-        if(fields[currentColumn][currentRow] == " ") :
-            if(currentRow == fieldRowSize - 1) :
+    for currentRow in range(fieldRowSize):
+        if(fields[currentColumn][currentRow] == " "):
+            if(currentRow == fieldRowSize - 1):
                 fields[currentColumn][currentRow] = entry
                 succeeded = True
-            else : 
+            else: 
                 previousRow = currentRow
                 continue
-        else :
-            if(fields[currentColumn][previousRow] == " ") :
+        else:
+            if(fields[currentColumn][previousRow] == " "):
                 fields[currentColumn][previousRow] = entry
                 succeeded = True
             break
     return succeeded
 
-def IsColumnCompleted(fields, currentColumn, entry) :
+
+def IsColumnCompleted(fields, currentColumn, entry):
     success = False
     counter = 0
-    for currentRow in range(fieldRowSize) :
-        if(fields[currentColumn][currentRow] != entry) :
+    for currentRow in range(fieldRowSize):
+        if(fields[currentColumn][currentRow] != entry):
             counter = 0
             continue
-        else :
+        else:
             counter += 1
-        if(counter >= winCount) :
+        if(counter >= winCount):
             success = True
             break
     return success
 
-def IsRowCompleted(fields, currentColumn, entry) :
+
+def IsRowCompleted(fields, currentColumn, entry):
     success = False
-    for currentRow in range(fieldRowSize) :
-        if(fields[currentColumn][currentRow] != entry) :
+    for currentRow in range(fieldRowSize):
+        if(fields[currentColumn][currentRow] != entry):
             continue
-        else :
+        else:
             #check on left
             leftCounter = 1
-            for column in range(currentColumn - 1, -1, -1) :
-                if(fields[column][currentRow] != entry) :
+            for column in range(currentColumn - 1, -1, -1):
+                if(fields[column][currentRow] != entry):
                     break
-                else :
+                else:
                     leftCounter += 1
             #check on right
             rightCounter = 1
-            for column in range(currentColumn + 1, fieldColumnSize) :
-                if(fields[column][currentRow] != entry) :
+            for column in range(currentColumn + 1, fieldColumnSize):
+                if(fields[column][currentRow] != entry):
                     break
-                else :
+                else:
                     rightCounter += 1
             break
-    if(leftCounter >= winCount or rightCounter >= winCount) :
+    if(leftCounter >= winCount or rightCounter >= winCount):
         success = True
     return success
 
-def getLeftBottomDiagonal(fields, column, row) :
+
+def getLeftBottomDiagonal(fields, column, row):
     counter = 1
     row += 1
     column -= 1
-    while(row < fieldRowSize and column >= 0) :
-        if(fields[column][row] != entry) :
+    while(row < fieldRowSize and column >= 0):
+        if(fields[column][row] != entry):
             break
-        else :
+        else:
             counter += 1
             row += 1
             column -= 1
     return counter
+
 
 def getLeftUpDiagonal(fields, column, row) :
     counter = 1
