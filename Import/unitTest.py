@@ -186,7 +186,7 @@ def planesTestSuite():
 if __name__ == "__main__":
     # unittest.main()
     # runner = unittest.TextTestRunner()
-    with open('test-reports', 'wb') as output:
+    with open('test-reports.xml', 'wb') as output:
         runner = xmlrunner.XMLTestRunner(output=output)
         runner.run(carsTestSuite())
         runner.run(planesTestSuite())
