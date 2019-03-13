@@ -11,15 +11,17 @@ myLeftovers = []
 
 print(myUniqueList)
 
-def addToLeftOvers(value) :
+
+def addToLeftOvers(value):
     myLeftovers.append(value)
     return
 
-def addToList(value) :
+
+def addToList(value):
     result = False
-    if(value in myUniqueList) :
+    if(value in myUniqueList):
         addToLeftOvers(value)
-    else :
+    else:
         myUniqueList.append(value)
         result = True
     return result
@@ -36,7 +38,3 @@ print(addToList(1))
 
 print("myUniqueList : ", myUniqueList)
 print("myLeftovers : ", myLeftovers)
-
-
-
-

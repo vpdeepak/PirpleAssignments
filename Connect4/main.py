@@ -1,8 +1,10 @@
+
 """
 This is the solution for the Project #1: Connect 4
 
 """
-print("Assignment on Connect 4" , "\n")
+
+print("Assignment on Connect 4", "\n")
 
 rows = 12
 columns = 14
@@ -77,14 +79,14 @@ def IsRowCompleted(fields, currentColumn, entry):
         if(fields[currentColumn][currentRow] != entry):
             continue
         else:
-            #check on left
+            # check on left
             leftCounter = 1
             for column in range(currentColumn - 1, -1, -1):
                 if(fields[column][currentRow] != entry):
                     break
                 else:
                     leftCounter += 1
-            #check on right
+            # check on right
             rightCounter = 1
             for column in range(currentColumn + 1, fieldColumnSize):
                 if(fields[column][currentRow] != entry):
@@ -111,114 +113,115 @@ def getLeftBottomDiagonal(fields, column, row):
     return counter
 
 
-def getLeftUpDiagonal(fields, column, row) :
+def getLeftUpDiagonal(fields, column, row):
     counter = 1
     row -= 1
     column -= 1
-    while(row >= 0 and column >= 0) :
-        if(fields[column][row] != entry) :
+    while(row >= 0 and column >= 0):
+        if(fields[column][row] != entry):
             break
-        else :
+        else:
             counter += 1
             row -= 1
             column -= 1
     return counter
 
-def getRightBottomDiagonal(fields, column, row) :
+def getRightBottomDiagonal(fields, column, row):
     counter = 1
     row += 1
     column += 1
-    while(row < fieldRowSize and column < fieldColumnSize) :
-        if(fields[column][row] != entry) :
+    while(row < fieldRowSize and column < fieldColumnSize):
+        if(fields[column][row] != entry):
             break
-        else :
+        else:
             counter += 1
             row += 1
             column += 1
     return counter
 
-def getRightUpDiagonal(fields, column, row) :
+def getRightUpDiagonal(fields, column, row):
     counter = 1
     row -= 1
     column += 1
-    while(row >= 0 and column < fieldColumnSize) :
-        if(fields[column][row] != entry) :
+    while(row >= 0 and column < fieldColumnSize):
+        if(fields[column][row] != entry):
             break
-        else :
+        else:
             counter += 1
             row -= 1
             column += 1
     return counter
 
-def IsDiagonalCompleted(fields, currentColumn, entry) :
+def IsDiagonalCompleted(fields, currentColumn, entry):
     success = False
-    for currentRow in range(fieldRowSize) :
-        if(fields[currentColumn][currentRow] != entry) :
+    for currentRow in range(fieldRowSize):
+        if(fields[currentColumn][currentRow] != entry):
             continue
-        else :
-            #check left bottom
+        else:
+            # check left bottom
             leftBottomCounter = getLeftBottomDiagonal(fields, currentColumn, currentRow)
-            #check left up
+            # check left up
             leftUpCounter = getLeftUpDiagonal(fields, currentColumn, currentRow)
-            #check right bottom
+            # check right bottom
             rightBottomCounter = getRightBottomDiagonal(fields, currentColumn, currentRow)
-            #check right up
+            # check right up
             rightUpCounter = getRightUpDiagonal(fields, currentColumn, currentRow)
             break
     
     if(leftBottomCounter >= winCount or leftUpCounter >= winCount or
-       rightBottomCounter >= winCount or rightUpCounter >= winCount) :
+       rightBottomCounter >= winCount or rightUpCounter >= winCount):
         success = True
 
     return success
 
-def HasWon(fields, currentColumn, entry) :
+
+def HasWon(fields, currentColumn, entry):
     success = False
-    if(IsColumnCompleted(fields, currentColumn, entry)) : #vertical downward check
+    if(IsColumnCompleted(fields, currentColumn, entry)):  # vertical downward check
         success = True
-    elif(IsRowCompleted(fields, currentColumn, entry)) :  #horizontal row checks
+    elif(IsRowCompleted(fields, currentColumn, entry)):   # horizontal row checks
         success = True
-    elif(IsDiagonalCompleted(fields, currentColumn, entry)) : #diagonal checks
+    elif(IsDiagonalCompleted(fields, currentColumn, entry)):  # diagonal checks
         success = True
     return success
 
 
 currentFields = []
-for column in range(fieldColumnSize) :
+for column in range(fieldColumnSize):
     currentFields.append([])
-    for row in range(fieldRowSize) :
+    for row in range(fieldRowSize):
         currentFields[column].append(" ")
 
 Player = 1
 NumberOfMoves = 1
 gameWon = False
-while(NumberOfMoves <= (fieldColumnSize * fieldRowSize) and not gameWon) :
+while(NumberOfMoves <= (fieldColumnSize * fieldRowSize) and not gameWon):
     DrawBoard(currentFields)
     try :
         currentColumn = int(input("Move {0} : Player {1} : Enter the column to insert : ".format(NumberOfMoves, Player)))
-    except ValueError :
+    except ValueError:
         continue
-    if(currentColumn > fieldColumnSize) :
+    if(currentColumn > fieldColumnSize):
         continue
     
-    if(Player == 1) :
+    if(Player == 1):
         entry = "X"
         nextPlayer = 2
-    else :
+    else:
         entry = "O"
         nextPlayer = 1
 
-    if(PlaceEntry(currentFields, currentColumn - 1, entry)) :
-        if(not HasWon(currentFields, currentColumn - 1, entry)) :
+    if(PlaceEntry(currentFields, currentColumn - 1, entry)):
+        if(not HasWon(currentFields, currentColumn - 1, entry)):
             Player = nextPlayer
             NumberOfMoves += 1
         else :
             gameWon = True
 
 print("\n====== GAME OVER ======")
-if(gameWon) :
+if(gameWon):
     print("Player {0} : has won the game. \n".format(Player))
-else :
+else:
     print("It's a DRAW \n")
 
 DrawBoard(currentFields)
