@@ -126,6 +126,7 @@ def getLeftUpDiagonal(fields, column, row):
             column -= 1
     return counter
 
+
 def getRightBottomDiagonal(fields, column, row):
     counter = 1
     row += 1
@@ -139,6 +140,7 @@ def getRightBottomDiagonal(fields, column, row):
             column += 1
     return counter
 
+
 def getRightUpDiagonal(fields, column, row):
     counter = 1
     row -= 1
@@ -151,6 +153,7 @@ def getRightUpDiagonal(fields, column, row):
             row -= 1
             column += 1
     return counter
+
 
 def IsDiagonalCompleted(fields, currentColumn, entry):
     success = False
@@ -167,7 +170,7 @@ def IsDiagonalCompleted(fields, currentColumn, entry):
             # check right up
             rightUpCounter = getRightUpDiagonal(fields, currentColumn, currentRow)
             break
-    
+         
     if(leftBottomCounter >= winCount or leftUpCounter >= winCount or
        rightBottomCounter >= winCount or rightUpCounter >= winCount):
         success = True
@@ -197,13 +200,12 @@ NumberOfMoves = 1
 gameWon = False
 while(NumberOfMoves <= (fieldColumnSize * fieldRowSize) and not gameWon):
     DrawBoard(currentFields)
-    try :
+    try:
         currentColumn = int(input("Move {0} : Player {1} : Enter the column to insert : ".format(NumberOfMoves, Player)))
     except ValueError:
         continue
     if(currentColumn > fieldColumnSize):
         continue
-    
     if(Player == 1):
         entry = "X"
         nextPlayer = 2
@@ -215,7 +217,7 @@ while(NumberOfMoves <= (fieldColumnSize * fieldRowSize) and not gameWon):
         if(not HasWon(currentFields, currentColumn - 1, entry)):
             Player = nextPlayer
             NumberOfMoves += 1
-        else :
+        else:
             gameWon = True
 
 print("\n====== GAME OVER ======")
