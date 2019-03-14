@@ -20,7 +20,9 @@ jobs:
             - "/usr/local/lib/python3.7/site-packages"
       - run:
           command: |
-            pipenv run python ./Import/unitTest.py
+            # pipenv run python ./Import/unitTest.py
+            . venv/bin/activate
+            python ./Import/unitTest.py
             pipenv run pep8 . --filename=*.py
 
 
