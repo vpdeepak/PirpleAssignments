@@ -5,5 +5,5 @@ jobs:
     - image: circleci/python
     steps:
     - checkout
-    - run: ${CIRCLE_WORKING_DIRECTORY}\runUnitTests.bat
+    - run: ls ${CIRCLE_WORKING_DIRECTORY} # run: ${CIRCLE_WORKING_DIRECTORY}\runUnitTests.bat
 
