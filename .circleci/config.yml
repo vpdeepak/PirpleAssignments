@@ -21,12 +21,11 @@ jobs:
             - "/usr/local/lib/python3.7/site-packages"
       - run:
           command: |
-            # pipenv run python ./Import/unitTest.py
             python ./Import/unitTest.py
             coverage run ./Import/unitTest.py
             coverage report
             coverage html
-            pep8 . --filename=*.py
+            # pep8 . --filename=*.py
       - store_artifacts:
           path: htmlcov
 
