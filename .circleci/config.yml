@@ -2,17 +2,17 @@ version: 2
 jobs:
   build:
     docker:
-    - image: circleci/python:3.7.2
+      - image: circleci/python:3.7.2
     working_directory: ~/workspace
     steps:
-    - checkout    
-    - run:
-      command: |
-        sudo pip install pipenv
-        sudo pip install pep8
-        sudo pip install unittest-xml-reporting
-        pipenv install
-        pipenv run python ./Import/unitTest.py
-        # pipenv run pep8 . --filename=*.py
+      - checkout    
+      - run:
+        command: |
+          sudo pip install pipenv
+          sudo pip install pep8
+          sudo pip install unittest-xml-reporting
+          pipenv install
+          pipenv run python ./Import/unitTest.py
+          # pipenv run pep8 . --filename=*.py
 
 
