@@ -22,6 +22,6 @@ jobs:
           command: |
             # pipenv run python ./Import/unitTest.py
             python ./Import/unitTest.py
-            pipenv run pep8 . --filename=*.py
+            pep8 . --filename=*.py
 
 
