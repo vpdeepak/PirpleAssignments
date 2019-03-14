@@ -8,9 +8,8 @@ jobs:
     - checkout    
     - run:
       command: |
-        sudo pip install pipenv
         sudo pip install pep8
-        pipenv install
+        sudo pip install unittest-xml-reporting
         pipenv run python ./Import/unitTest.py
         pipenv run pep8 . --filename=*.py
 
