@@ -11,6 +11,7 @@ jobs:
             sudo pip install pipenv
             sudo pip install pep8
             sudo pip install unittest-xml-reporting
+            sudo pip install xmlrunner
             pipenv install
       - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
