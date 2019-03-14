@@ -11,6 +11,6 @@ jobs:
         sudo pip install pep8
         sudo pip install unittest-xml-reporting
         pipenv run python ./Import/unitTest.py
-        pipenv run pep8 . --filename=*.py
+        # pipenv run pep8 . --filename=*.py
 
 
