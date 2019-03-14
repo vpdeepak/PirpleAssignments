@@ -20,8 +20,7 @@ jobs:
             - "/usr/local/lib/python3.7/site-packages"
       - run:
           command: |
-            # pipenv run python ./Import/unitTest.py
-            sudo pip show unittest-xml-reporting
+            pipenv run python ./Import/unitTest.py
             pipenv run pep8 . --filename=*.py
 
 
