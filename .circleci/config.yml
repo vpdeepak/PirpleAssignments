@@ -12,7 +12,15 @@ jobs:
             sudo pip install pep8
             sudo pip install unittest-xml-reporting
             pipenv install
+      - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.7/site-packages"
+      - run:
+          command: |
             pipenv run python ./Import/unitTest.py
-            # pipenv run pep8 . --filename=*.py
+            pipenv run pep8 . --filename=*.py
 
 
