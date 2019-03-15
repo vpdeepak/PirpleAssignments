@@ -14,7 +14,7 @@ class Vehicle:
         self.Weight = weight
         self.NeedsMaintenance = False
         self.TripsSinceMaintenance = 0
-        
+
     # setters
     def setMake(self, make):
         self.Make = make
@@ -81,7 +81,7 @@ class Planes(Vehicle):
         self.ManageMaintainence()
 
 
-class CarsTest(unittest.TestCase):   
+class CarsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         print("\n Tests related to Class Cars \n")
@@ -141,7 +141,7 @@ class PlanesTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         print("\n Tests related to Class Planes \n")
-    
+
     def setUp(self):
         self.Boeing = Planes("Boeing", "Dreamliner 787", 2018, 12000)
 
