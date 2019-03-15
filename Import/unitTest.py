@@ -4,7 +4,6 @@ This is the solution for the Homework #10: Importing
 """
 import unittest
 import xmlrunner
-import doctest
 
 
 class Vehicle:
@@ -82,8 +81,7 @@ class Planes(Vehicle):
         self.ManageMaintainence()
 
 
-class CarsTest(unittest.TestCase):
-    
+class CarsTest(unittest.TestCase):   
     @classmethod
     def setUpClass(cls):
         print("\n Tests related to Class Cars \n")

@@ -71,15 +71,14 @@ class Planes(Vehicle):
             self.TripsSinceMaintenance += 1
 
     def Flying(self):
-        result = False
         if(self.NeedsMaintenance):
             self.IsFlying = False
             print("{0} {1} can't fly until it's repaired.".format(self.Make, self.Model))
-        else :
+        else:
             self.IsFlying = True
         return self.IsFlying
 
-    def Landing (self):
+    def Landing(self):
         self.ManageTrips()
         self.IsFlying = False
         self.ManageMaintainence()
