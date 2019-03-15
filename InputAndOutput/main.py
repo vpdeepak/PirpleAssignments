@@ -11,19 +11,16 @@ def WriteToFile(fileName, option):
     content = input("Please enter the text to be put to the file " + fileName + " : ")
     with open(fileName, option) as inputFile:
         inputFile.write(content + "\n")
-    return
 
 
 def ReadFile(fileName):
     with open(fileName, "r") as inputFile:
         for line in inputFile:
             print(line)
-    return
 
 
 def DeleteFile(fileName):
     os.remove(fileName)
-    return
 
 
 def ReplaceLine(fileName):
@@ -41,7 +38,6 @@ def ReplaceLine(fileName):
     with open(fileName, "w") as newFile:
         for line in content:
             newFile.write(line)
-    return
 
 
 def DisplayOptions():

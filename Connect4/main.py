@@ -36,7 +36,6 @@ def DrawBoard(fields):
                     print("-", end="")
                 else:
                     print("-")
-    return
 
 
 def PlaceEntry(fields, currentColumn, entry):
@@ -47,7 +46,7 @@ def PlaceEntry(fields, currentColumn, entry):
             if(currentRow == fieldRowSize - 1):
                 fields[currentColumn][currentRow] = entry
                 succeeded = True
-            else: 
+            else:
                 previousRow = currentRow
                 continue
         else:
