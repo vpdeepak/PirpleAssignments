@@ -4,13 +4,14 @@ from abstractInteractor import Interactor
 
 
 class PyGameInteractor(Interactor):
-    # Defining the colors used in the project
+    # Defining the colors used in the game
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     RED = (255, 0, 0)
     GREEN = (0, 255, 0)
     BLUE = (0, 0, 255)
 
+    # Defining the surface size of the game
     APPLICATION_x_size = 1200
     APPLICATION_y_size = 600
 
@@ -18,6 +19,8 @@ class PyGameInteractor(Interactor):
         # Initialize the game engine
         pygame.init()
         pygame.time.Clock().tick(10)
+        pygame.display.set_caption('HANGMAN')
+
         self.screen = pygame.display.set_mode(
             (self.APPLICATION_x_size, self.APPLICATION_y_size))
         self.FONTHEADER = pygame.font.Font("freesansbold.ttf", 50)
@@ -37,7 +40,12 @@ class PyGameInteractor(Interactor):
         self.screen.fill(self.WHITE)
         pygame.display.update()
 
+    def setTitle(self):
+        self.screen.blit(self.FONTHEADER.render(
+            "HANGMAN", True, self.BLACK), (450, 15))
+
     def getInputWord(self, maxLength):
+        self.setTitle()
         message_X = 200
         message_Y = 200
         message = f"Please enter the input word (max length {maxLength}): "
@@ -121,6 +129,8 @@ class PyGameInteractor(Interactor):
 
     def updateDisplay(self, word, chances, incorrectResponses,
                       remainingChances):
+        self.setTitle()
+
         # draw the gallows
         self.drawGallows()
 
@@ -168,6 +178,7 @@ class PyGameInteractor(Interactor):
         return letter
 
     def displayEndMessage(self, success, chances, remainingChances):
+        self.setTitle()
         message_X = 200
         message_Y = 250
 
