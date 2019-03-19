@@ -130,25 +130,19 @@ class PyGameInteractor(Interactor):
     def updateDisplay(self, word, chances, incorrectResponses,
                       remainingChances):
         self.setTitle()
-
         # draw the gallows
         self.drawGallows()
-
         # depending on the inverse of the remaining chances draw the man
         countInvalidReponses = chances - remainingChances
         for count in range(1, countInvalidReponses + 1):
             draw = self.HangmanMap.get(count)
             draw()
-
         # display the puzzle
         self.drawPuzzle(word)
-
         # display the remaining chances
         self.drawRemainingChances(chances, remainingChances)
-
         # display the incorrect responses
         self.drawIncorrectResponses(incorrectResponses)
-
         pygame.display.update()
 
     def getAnswerLetter(self):

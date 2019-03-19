@@ -80,19 +80,25 @@ class Hangman(object):
 
     @staticmethod
     def validateInputLetter(letter):
-        if(len(letter) > 1 or letter.isspace()):
+        try:
+            if(len(letter) > 1 or letter.isspace()):
+                return None
+            else:
+                return letter
+        except:
             return None
-        else:
-            return letter
 
     @staticmethod
     def validateInputWord(word, maxLength):
-        if(len(word) > maxLength):
-            return None
-        word = re.sub(" +", " ", word)
-        if(word.replace(" ", "").isalnum()):
-            return word.strip()
-        else:
+        try:
+            if(len(word) > maxLength):
+                return None
+            word = re.sub(" +", " ", word)
+            if(word.replace(" ", "").isalnum()):
+                return word.strip()
+            else:
+                return None
+        except:
             return None
 
     @staticmethod
