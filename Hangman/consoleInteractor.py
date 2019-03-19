@@ -13,8 +13,8 @@ class ConsoleInteractor(Interactor):
 
     def updateDisplay(self, word, chances, incorrectRespones,
                       remainingChances):
-        for count in range(0, len(word)):
-            print(word[count] + " ", end="")
+        for letter in word:
+            print(letter + " ", end="")
         print(f"\n {remainingChances} / {chances} chances are remaining.")
         print(f"Incorrect responses : ", end="")
         for letter in incorrectRespones:
@@ -25,7 +25,7 @@ class ConsoleInteractor(Interactor):
         letter = str(input("Please enter a letter : "))
         return letter
 
-    def displayEndMessage(self, chances, remainingChances):
+    def displayEndMessage(self, success, chances, remainingChances):
         if(success):
             print("You have guessed the word. You WON.")
         else:

@@ -15,9 +15,10 @@ class Interactor(ABC):
         system("cls")
 
     @abstractmethod
-    def updateDisplay(self, word, chances, incorrectRespones):
+    def updateDisplay(self, word, chances, incorrectResponses,
+                      remainingChances):
         pass
 
     @abstractmethod
-    def displayEndMessage(self, chances, remainingChances):
+    def displayEndMessage(self, success, chances, remainingChances):
         pass

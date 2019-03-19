@@ -95,9 +95,9 @@ class PyGameInteractor(Interactor):
     def drawPuzzle(self, word):
         message_X = 100
         message_Y = 175
-        for index in range(0, len(word)):
+        for letter in word:
             self.screen.blit(self.FONTNORMAL.render(
-                f"{word[index]} ", True, self.BLUE), (message_X, message_Y))
+                f"{letter} ", True, self.BLUE), (message_X, message_Y))
             message_X += 30
 
     def drawRemainingChances(self, chances, remainingChances):

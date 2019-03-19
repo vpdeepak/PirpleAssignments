@@ -23,5 +23,5 @@ for num in range(1, 101, 1):
 
     if(counter == 2):
         show = "prime"
-        
+
     print(show)

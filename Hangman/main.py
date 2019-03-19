@@ -15,10 +15,10 @@ class Hangman(object):
         self.chances = noOfChances
 
     def play(self):
-        quit = False
+        close = False
         maxLength = 30
 
-        while(not quit):
+        while(not close):
             success = False
             remainingChances = self.chances
 
@@ -26,16 +26,16 @@ class Hangman(object):
             self.interactor.clearDisplay()
 
             # Get the input from Player 1
-            quizWord = self.validateInputWord(
+            quizWord = Hangman.validateInputWord(
                 str(self.interactor.getInputWord(maxLength)), maxLength)
 
             if(quizWord is None):
                 continue
             elif(str(quizWord).upper() == "QUIT"):
-                quit = True
+                close = True
                 continue
 
-            puzzleWord = self.formulatePuzzle(quizWord, None, None)
+            puzzleWord = Hangman.formulatePuzzle(quizWord, None, None)
             incorrectRespones = []
             self.updateDisplay(
                 puzzleWord, incorrectRespones, remainingChances)
@@ -44,7 +44,7 @@ class Hangman(object):
                 self.updateDisplay(
                     puzzleWord, incorrectRespones, remainingChances)
                 # get the input from Player 2
-                letter = self.validateInputLetter(
+                letter = Hangman.validateInputLetter(
                     str(self.interactor.getAnswerLetter()))
 
                 time.sleep(0.5)
@@ -63,7 +63,7 @@ class Hangman(object):
                 if(not puzzleWord.__contains__("_")):
                     success = True
 
-                # instruct the interactor to update display based on user input
+            # instruct the interactor to update display based on user input
             self.updateDisplay(puzzleWord, incorrectRespones, remainingChances)
 
             time.sleep(3)
@@ -78,13 +78,15 @@ class Hangman(object):
                                       incorrectRespones,
                                       remainingChances)
 
-    def validateInputLetter(self, letter):
+    @staticmethod
+    def validateInputLetter(letter):
         if(len(letter) > 1 or letter.isspace()):
             return None
         else:
             return letter
 
-    def validateInputWord(self, word, maxLength):
+    @staticmethod
+    def validateInputWord(word, maxLength):
         if(len(word) > maxLength):
             return None
         word = re.sub(" +", " ", word)
@@ -93,15 +95,16 @@ class Hangman(object):
         else:
             return None
 
-    def formulatePuzzle(self, word, puzzleWord, letter):
+    @staticmethod
+    def formulatePuzzle(word, puzzleWord, letter):
         puzzle = ""
-        for ch in range(0, len(word)):
-            if(word[ch] == " "):
+        for index, character in enumerate(word):
+            if(character == " "):
                 puzzle += ' '
-            elif(word[ch] == letter):
+            elif(character == letter):
                 puzzle += letter.upper()
             elif(puzzleWord is not None):
-                puzzle += puzzleWord[ch]
+                puzzle += puzzleWord[index]
             else:
                 puzzle += '_'
         return puzzle
@@ -110,7 +113,7 @@ class Hangman(object):
 def main():
     # interactor = ConsoleInteractor()
     interactor = PyGameInteractor()
-    game = Hangman(interactor, 5)
+    game = Hangman(interactor, 7)
     game.play()
 
 
