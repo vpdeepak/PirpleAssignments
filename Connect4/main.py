@@ -161,15 +161,19 @@ def IsDiagonalCompleted(fields, currentColumn, entry):
             continue
         else:
             # check left bottom
-            leftBottomCounter = getLeftBottomDiagonal(fields, currentColumn, currentRow)
+            leftBottomCounter = getLeftBottomDiagonal(fields, currentColumn,
+                                                      currentRow)
             # check left up
-            leftUpCounter = getLeftUpDiagonal(fields, currentColumn, currentRow)
+            leftUpCounter = getLeftUpDiagonal(
+                fields, currentColumn, currentRow)
             # check right bottom
-            rightBottomCounter = getRightBottomDiagonal(fields, currentColumn, currentRow)
+            rightBottomCounter = getRightBottomDiagonal(
+                fields, currentColumn, currentRow)
             # check right up
-            rightUpCounter = getRightUpDiagonal(fields, currentColumn, currentRow)
+            rightUpCounter = getRightUpDiagonal(
+                fields, currentColumn, currentRow)
             break
-         
+
     if(leftBottomCounter >= winCount or leftUpCounter >= winCount or
        rightBottomCounter >= winCount or rightUpCounter >= winCount):
         success = True
@@ -179,11 +183,14 @@ def IsDiagonalCompleted(fields, currentColumn, entry):
 
 def HasWon(fields, currentColumn, entry):
     success = False
-    if(IsColumnCompleted(fields, currentColumn, entry)):  # vertical downward check
+    # vertical downward check
+    if(IsColumnCompleted(fields, currentColumn, entry)):
         success = True
-    elif(IsRowCompleted(fields, currentColumn, entry)):   # horizontal row checks
+    # horizontal row checks
+    elif(IsRowCompleted(fields, currentColumn, entry)):
         success = True
-    elif(IsDiagonalCompleted(fields, currentColumn, entry)):  # diagonal checks
+    # diagonal checks
+    elif(IsDiagonalCompleted(fields, currentColumn, entry)):
         success = True
     return success
 
@@ -200,7 +207,9 @@ gameWon = False
 while(NumberOfMoves <= (fieldColumnSize * fieldRowSize) and not gameWon):
     DrawBoard(currentFields)
     try:
-        currentColumn = int(input("Move {0} : Player {1} : Enter the column to insert : ".format(NumberOfMoves, Player)))
+        currentColumn = int(input(
+            "Move {0} : Player {1} : Enter the column to insert : ".
+            format(NumberOfMoves, Player)))
     except ValueError:
         continue
     if(currentColumn > fieldColumnSize):
