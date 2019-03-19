@@ -12,5 +12,11 @@
     ],
     "python.unitTest.pyTestEnabled": false,
     "python.unitTest.nosetestsEnabled": false,
-    "python.unitTest.unittestEnabled": true
+    "python.unitTest.unittestEnabled": true,
+    "editor.fontLigatures": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.fontSize": 15,
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorStyle": "block"
 }

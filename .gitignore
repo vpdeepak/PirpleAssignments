@@ -8,3 +8,6 @@
 /Import/__pycache__
 test-reports/carsTestSuite.xml
 test-reports/planesTestSuite.xml
+Hangman/__pycache__/pygameInteractor.cpython-37.pyc
+Hangman/__pycache__/abstractInteractor.cpython-37.pyc
+Hangman/__pycache__/consoleInteractor.cpython-37.pyc

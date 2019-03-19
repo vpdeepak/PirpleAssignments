@@ -1,66 +1,117 @@
-import pygame
+"""
+This is the solution for the Project #2: Hangman
+
+"""
+
 import re
-
-# Initialize the game engine
-pygame.init()
-
-# Defining the colors used in the project
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-
-FONTHEADER = pygame.font.Font("freesansbold.ttf", 50)
-FONTNORMAL = pygame.font.Font("freesansbold.ttf", 30)
-
-APPLICATION_x_size = 1200
-APPLICATION_y_size = 600
+import time
+from consoleInteractor import ConsoleInteractor
+from pygameInteractor import PyGameInteractor
 
 
-def getWordFromUser():
-    x = 200
-    inputWord = ""
-    inputDone = False
-    pygame.time.Clock().tick(10)
-    while not inputDone:
-        for event in pygame.event.get():
-            if(event.type == pygame.KEYDOWN):
-                if(event.key == 271):
-                    inputDone = True
-                elif(re.search("[A-Za-z]", chr(event.key))):
-                    screen.blit(FONTNORMAL.render(chr(event.key), True, BLUE),
-                                (x, 300))
-                    x += 30
-                    inputWord += chr(event.key)
-                pygame.display.update()
-    return inputWord
+class Hangman(object):
+    def __init__(self, interactor, noOfChances):
+        self.interactor = interactor
+        self.chances = noOfChances
+
+    def play(self):
+        quit = False
+        maxLength = 30
+
+        while(not quit):
+            success = False
+            remainingChances = self.chances
+
+            # Clear the interactor
+            self.interactor.clearDisplay()
+
+            # Get the input from Player 1
+            quizWord = self.validateInputWord(
+                str(self.interactor.getInputWord(maxLength)), maxLength)
+
+            if(quizWord is None):
+                continue
+            elif(str(quizWord).upper() == "QUIT"):
+                quit = True
+                continue
+
+            puzzleWord = self.formulatePuzzle(quizWord, None, None)
+            incorrectRespones = []
+            self.updateDisplay(
+                puzzleWord, incorrectRespones, remainingChances)
+
+            while(remainingChances > 0 and not success):
+                self.updateDisplay(
+                    puzzleWord, incorrectRespones, remainingChances)
+                # get the input from Player 2
+                letter = self.validateInputLetter(
+                    str(self.interactor.getAnswerLetter()))
+
+                time.sleep(0.5)
+                if(letter is None):
+                    # instruct the interactor to update display based on user
+                    #  input
+                    continue
+                elif(quizWord.__contains__(letter)):
+                    puzzleWord = self.formulatePuzzle(
+                        quizWord, puzzleWord, letter)
+                elif(incorrectRespones.__contains__(letter)):
+                    continue
+                else:
+                    remainingChances -= 1
+                    incorrectRespones.append(letter)
+                if(not puzzleWord.__contains__("_")):
+                    success = True
+
+                # instruct the interactor to update display based on user input
+            self.updateDisplay(puzzleWord, incorrectRespones, remainingChances)
+
+            time.sleep(3)
+            self.interactor.clearDisplay()
+            self.interactor.displayEndMessage(
+                success, self.chances, remainingChances)
+            time.sleep(3)
+
+    def updateDisplay(self, puzzleWord, incorrectRespones, remainingChances):
+        self.interactor.clearDisplay()
+        self.interactor.updateDisplay(puzzleWord, self.chances,
+                                      incorrectRespones,
+                                      remainingChances)
+
+    def validateInputLetter(self, letter):
+        if(len(letter) > 1 or letter.isspace()):
+            return None
+        else:
+            return letter
+
+    def validateInputWord(self, word, maxLength):
+        if(len(word) > maxLength):
+            return None
+        word = re.sub(" +", " ", word)
+        if(word.replace(" ", "").isalnum()):
+            return word.strip()
+        else:
+            return None
+
+    def formulatePuzzle(self, word, puzzleWord, letter):
+        puzzle = ""
+        for ch in range(0, len(word)):
+            if(word[ch] == " "):
+                puzzle += ' '
+            elif(word[ch] == letter):
+                puzzle += letter.upper()
+            elif(puzzleWord is not None):
+                puzzle += puzzleWord[ch]
+            else:
+                puzzle += '_'
+        return puzzle
 
 
-screen = pygame.display.set_mode((APPLICATION_x_size, APPLICATION_y_size))
-pygame.display.set_caption("HANGMAN")
+def main():
+    # interactor = ConsoleInteractor()
+    interactor = PyGameInteractor()
+    game = Hangman(interactor, 5)
+    game.play()
 
-done = False
-clock = pygame.time.Clock()
-x = 200
-screen.fill(WHITE)
-screen.blit(FONTHEADER.render("HANGMAN", True, BLACK), (495, 10))
 
-inputString = "Player 1 : Please enter the word to be used. "
-screen.blit(FONTNORMAL.render(inputString, True, BLUE), (200, 200))
-pygame.display.flip()
-
-quizWord = getWordFromUser()
-screen.blit(FONTNORMAL.render(quizWord, True, BLUE), (200, 400))
-pygame.display.flip()
-
-while not done:
-    clock.tick(10)
-    for event in pygame.event.get():
-        if(event.type == pygame.QUIT):
-            done = True
-    # pygame.draw.line(screen, GREEN, [0, 0], [50, 30], 5)
-    # pygame.draw.ellipse(screen, RED, [0, 0, 150, 150], 1)
-    pygame.display.flip()
-
-pygame.quit()
+main()
